@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <title>logged</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+
+    logged_in.html
+
+    <br>
+    <br>
+
+    now username
+
+    {{username}}
+
+    <br>
+    <br>
+    now session
+
+    {{nowsession}}
+
+    <br><br>
+
+    <!-- 在 HTML 中建立一個按鈕 -->
+    <button id="get-user-info-btn">取得使用者資訊</button>
+    <!-- JavaScript 代碼 -->
+    <script>
+        // 取得按鈕元素
+        const getUserInfoBtn = document.getElementById('get-user-info-btn');
+
+        // 當使用者點擊按鈕時
+        getUserInfoBtn.addEventListener('click', async () => {
+            // 向伺服器發送 API 請求並夾帶 session ID
+            const response = await axios.post('/api/verify', {}, { withCredentials: true });
+            const admin_info = document.getElementById('admin_info');
+            admin_info.innerHTML = `
+                name: ${response.data.name};
+                age: ${response.data.age};
+            `
+        });
+    </script>
+
+    <div id="admin_info">
+
+    </div>
+
+</body>
+
+</html>
